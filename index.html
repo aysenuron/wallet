@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./src/output.css" rel="stylesheet">
     <script src="./src/script.js" defer></script>
+    <style>
+        .card-output {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px;
+            background-color: rgb(246, 246, 246);
+            border-radius: 10px;
+        }
+
+        .card-date-box {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
     <title>Wallet</title>
 </head>
 <body>
-    
+    <div id="backdrop" class="hidden w-full h-full fixed z-10 bg-black opacity-50">
+
+    </div>
     <header class="w-full px-4 pt-4 flex justify-start">
         <div class="w-full flex justify-between items-center">
             <p class="text-lg font-bold">
@@ -22,32 +39,36 @@
 
     <main class="max-w-screen-sm pt-4">
 
-        <div id="card-drawer" class="fixed transform translate-y-full transition-transform duration-500 bottom-0 h-auto w-full px-8 rounded-t-3xl space-y-8 py-8 pt-5 bg-white" style="box-shadow: 0 -4px 20px 8px rgba(24, 24, 24, 0.057);">
+        <div id="cards-list" class="flex-col py-4 px-4 space-y-4"></div>
+
+        <div id="card-drawer" class="z-20 fixed transform translate-y-full transition-transform duration-500 bottom-0 h-auto w-full px-8 rounded-t-3xl space-y-8 py-8 pt-5 bg-white" style="box-shadow: 0 -4px 20px 8px rgba(24, 24, 24, 0.057);">
             <div id="drawer-line" class="w-full cursor-pointer">
                 <div class="h-1 w-1/4 rounded-full bg-gray-200 mx-auto"></div>
             </div>
-            <div id="card-input-box" class="h-fit w-full p-4 rounded-lg border-black border flex-col space-y-4">
-                <div class="w-full">
-                    <input id="card-name" class="p-2 border-gray-300 border rounded-md w-3/4 font-mono" type="text" placeholder="Card Name">
+            
+                <div id="card-input-box" class="h-fit w-full p-4 rounded-lg border-black border flex-col space-y-4">
+                    <div class="w-full">
+                        <input id="card-name" class="p-2 border-gray-300 border rounded-md w-3/4 font-mono" type="text" placeholder="Card Name" required>
+                    </div>
+                    <div>
+                        <input id="card-number" class="w-full p-2 border-gray-300 border rounded-md font-mono" type="number" required placeholder="Card Number - XXXX XXXX XXXX XXXX">
+                    </div>
+                    <div>
+                        <input id="card-owner" class="w-full p-2 border-gray-300 border rounded-md font-mono" type="text" required placeholder="Card Owner">
+                    </div>
+                    <div class="flex gap-2 w-full">
+                        <input id="card-month" type="number" class="w-6/12 p-2 border-gray-300 border rounded-md font-mono" required placeholder="Month">
+                        <input id="card-year" type="number" class="w-6/12 p-2 border-gray-300 border rounded-md font-mono" required placeholder="Year">
+                    </div>
+                    <div class="w-full">
+                        <input id="card-cvc" class="w-4/12 p-2 border-gray-300 border rounded-md font-mono" type="number" required placeholder="CVC">
+                    </div>
                 </div>
-                <div>
-                    <input id="card-number" class="w-full p-2 border-gray-300 border rounded-md font-mono" type="number" placeholder="Card Number - XXXX XXXX XXXX XXXX">
-                </div>
-                <div>
-                    <input id="card-owner" class="w-full p-2 border-gray-300 border rounded-md font-mono" type="text" placeholder="Card Owner">
-                </div>
-                <div class="flex gap-2 w-full">
-                    <input id="card-month" type="number" class="w-6/12 p-2 border-gray-300 border rounded-md font-mono" placeholder="Month">
-                    <input id="card-year" type="number" class="w-6/12 p-2 border-gray-300 border rounded-md font-mono" placeholder="Year">
-                </div>
-                <div class="w-full">
-                    <input id="card-cvc" class="w-4/12 p-2 border-gray-300 border rounded-md font-mono" type="number" placeholder="CVC">
-                </div>
-            </div>
 
-            <button class="w-full bg-gradient-to-b from-gray-700 to-gray-800 text-white font-bold px-5 py-3 rounded-lg shadow-lg focus:shadow-sm hover:shadow-sm font-sans">
-                Save Card Information
-            </button>
+                <button id="save-card" type="submit" class="w-full bg-gradient-to-b from-gray-700 to-gray-800 text-white font-bold px-5 py-3 rounded-lg shadow-lg focus:shadow-sm hover:shadow-sm font-sans">
+                    Save Card Information
+                </button>
+          
         </div>
 
     </main>
