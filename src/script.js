@@ -9,29 +9,37 @@ const cardMonth = document.getElementById("card-month").value;
 const cardYear = document.getElementById("card-year").value;
 const cardCVC = document.getElementById("card-cvc").value;
 
+let startY = 0;
+let currentY = 0;
+let isDragging = false;
 
 addBtn.addEventListener("click", () => {
     cardDrawer.classList.remove("translate-y-full");
 });
 
-drawerLine.addEventListener("touchstart", (e) => {
-    startY = e.touches[0].clientY; // Record the starting Y position
+// Start dragging
+const startDrag = (y) => {
+    startY = y;
     isDragging = true;
-});
+};
 
-drawerLine.addEventListener("touchmove", (e) => {
+// Handle dragging movement
+const handleDrag = (y) => {
     if (!isDragging) return;
 
-    currentY = e.touches[0].clientY; // Track the current Y position
+    currentY = y;
     const deltaY = currentY - startY;
 
-    // Move the drawer down dynamically based on touch movement
+    // Move the drawer down dynamically
     if (deltaY > 0) {
         cardDrawer.style.transform = `translateY(${deltaY}px)`;
     }
-});
+};
 
-drawerLine.addEventListener("touchend", () => {
+// End dragging
+const endDrag = () => {
+    if (!isDragging) return;
+
     isDragging = false;
 
     // If dragged down enough, close the drawer
@@ -45,7 +53,17 @@ drawerLine.addEventListener("touchend", () => {
         cardDrawer.style.transform = "translateY(0)";
     }
 
-    // Reset touch values
+    // Reset touch/mouse values
     startY = 0;
     currentY = 0;
-});
+};
+
+// Event listeners for touch
+drawerLine.addEventListener("touchstart", (e) => startDrag(e.touches[0].clientY));
+drawerLine.addEventListener("touchmove", (e) => handleDrag(e.touches[0].clientY));
+drawerLine.addEventListener("touchend", endDrag);
+
+// Event listeners for mouse
+drawerLine.addEventListener("mousedown", (e) => startDrag(e.clientY));
+drawerLine.addEventListener("mousemove", (e) => handleDrag(e.clientY));
+document.addEventListener("mouseup", endDrag);
