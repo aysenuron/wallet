@@ -12,6 +12,16 @@ body.append(deleteButton);
 deleteButton.classList.add("delete-button");
 deleteButton.classList.add("hidden");
 
+const introText = document.getElementById("intro-text");
+
+function hideIntroText(textToHide) {
+    if (cards.length > 0) {
+        textToHide.classList.add("hidden");
+    } else {
+        textToHide.classList.remove("hidden");
+    }
+}
+
 let selectedCardsCount = 0;
 
 let cards = [];
@@ -168,6 +178,7 @@ backdrop.addEventListener("click", closeDrawer);
 saveCardBtn.addEventListener("click", () => {
     closeDrawer();
     addCardHandler();
+    hideIntroText(introText);
 });
 
 deleteButton.addEventListener("click", () => {
@@ -184,4 +195,6 @@ deleteButton.addEventListener("click", () => {
 
     selectedCardsCount = 0;
     deleteButton.classList.add("hidden");
+
+    hideIntroText(introText);
 });

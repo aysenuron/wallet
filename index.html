@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./src/img/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./src/img/apple-touch-icon.png">
     <link href="./src/output.css" rel="stylesheet">
     <script src="./src/script.js" defer></script>
     <style>
@@ -70,7 +72,33 @@
         </div>
     </header>
 
-    <main class="max-w-screen-sm pt-4">
+    <main class="w-full pt-4">
+
+        <div id="intro-text" class="w-full flex-col px-4 space-y-2">
+            <div class="w-full">
+                <img class="h-24 ml-auto mr-12" src="./src/img/arrow.png" alt="">
+            </div>
+            <div class="flex-col space-y-4">
+                <h1>
+                    With Wallet, you can easily store your card information and access it whenever you need it.
+                </h1>
+                <p>
+                    Simply click "+ Add Card," enter your card details, and when you're ready to use it, click the smiley icon next to the card number to copy it. It's that easy!
+                </p>
+                <p>
+                    If you have any suggestions for improvement, don't hesitate to email me.
+                </p>
+                <div class="w-fit cursor-pointer">
+                    <a href="mailto:onaranays@gmail.com?subject=Wallet App" class="flex gap-1 items-center font-bold">
+                        <button class="flex gap-1 items-center font-bold">
+                            <img class="w-4 h-4" src="./src/img/email.png" alt="email">
+                            Contact me
+                        </button>
+                    </a>
+                    <div class="w-full h-[2px] bg-black"></div>
+                </div>                
+            </div>
+        </div>
 
         <div id="cards-list" class="flex-col py-4 px-4 space-y-4"></div>
 
